@@ -8,26 +8,18 @@ class Member extends Model
 {
     public function storeMember($request)
     {
-        $this->name = $request->name;
-        $this->information = $request->information;
-        $this->phone = $request->phone;
-        $this->dob = $request->dob;
-        if ($request->file('avatar')->isValid()) {
-            $file = $request->avatar;
-            $fileName = time() . $file->getClientOriginalName();
-            $file->storeAs('avatar', $fileName);
-            $this->avatar = $fileName;
-        }
-        $this->position = $request->position;
-        $this->gender = $request->gender;
-        $this->save();
-
-        return $this;
+        return $this->saveData($this, $request);
     }
 
     public function updateMember($request, $id)
     {
         $member = $this->find($id);
+
+        return $this->saveData($member, $request);
+    }
+
+    public function saveData($member, $request)
+    {
         $member->name = $request->name;
         $member->information = $request->information;
         $member->phone = $request->phone;
