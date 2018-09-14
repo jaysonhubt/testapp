@@ -90,6 +90,11 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $member = Member::find($id);
+        if ($member) {
+            $member->delete();
+            return response()->json("Deleted member success");
+        }
+        return response()->json("Member does not exist");
     }
 }
