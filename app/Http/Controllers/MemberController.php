@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Member;
 use App\Http\Requests\StoreMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
 
 class MemberController extends Controller
 {
@@ -69,13 +70,16 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Http\Requests\UpdateMemberRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMemberRequest $request, $id)
     {
-        //
+        $member = new Member;
+        $result = $member->updateMember($request, $id);
+
+        return response()->json($result);
     }
 
     /**
