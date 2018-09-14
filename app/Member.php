@@ -24,4 +24,24 @@ class Member extends Model
 
         return $this;
     }
+
+    public function updateMember($request, $id)
+    {
+        $member = $this->find($id);
+        $member->name = $request->name;
+        $member->information = $request->information;
+        $member->phone = $request->phone;
+        $member->dob = $request->dob;
+        if ($request->hasFile('avatar')) {
+            $file = $request->avatar;
+            $fileName = time() . $file->getClientOriginalName();
+            $file->storeAs('avatar', $fileName);
+            $member->avatar = $fileName;
+        }
+        $member->position = $request->position;
+        $member->gender = $request->gender;
+        $member->save();
+
+        return $member;
+    }
 }
