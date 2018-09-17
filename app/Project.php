@@ -22,4 +22,12 @@ class Project extends Model
 
         return $project;
     }
+
+    public function showAll() {
+        return $this->all();
+    }
+
+    public function show($id) {
+        return $this->find($id);
+    }
 }
