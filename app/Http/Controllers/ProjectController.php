@@ -15,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = new Project;
-        $result = $projects->show();
+        $result = $projects->showAll();
 
         return response()->json($result);
     }
