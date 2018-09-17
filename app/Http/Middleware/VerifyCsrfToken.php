@@ -21,6 +21,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'members',
         'members/*',
+        'roles',
+        'roles/*',
         'projects',
         'projects/*'
     ];

@@ -15,4 +15,14 @@ class Role extends Model
     {
         return $this->belongsTo('App\Member','member_id','id');
     }
+
+    public function storeRole($request)
+    {
+        $this->project_id = $request->project_id;
+        $this->member_id = $request->member_id;
+        $this->role = $request->role;
+        $this->save();
+
+        return $this;
+    }
 }
