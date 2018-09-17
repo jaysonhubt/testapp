@@ -10,4 +10,9 @@ class Role extends Model
     {
         return $this->belongsTo('App\Project','project_id','id');
     }
+
+    public function members()
+    {
+        return $this->belongsTo('App\Member','member_id','id');
+    }
 }

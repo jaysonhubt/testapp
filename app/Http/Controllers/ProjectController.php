@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = new Project;
+        $result = $projects->showAll();
+
+        return response()->json($result);
     }
 
     /**
@@ -30,12 +35,15 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $project = new Project;
+        $project->storeProject($request);
+
+        return response()->json($project);
     }
 
     /**
@@ -46,7 +54,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $projects = new Project;
+        $result = $projects->show($id);
+
+        return response()->json($result);
     }
 
     /**
@@ -63,13 +74,16 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateProjectRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        //
+        $project = new Project;
+        $result = $project->updateProject($request, $id);
+
+        return response()->json($result);
     }
 
     /**
