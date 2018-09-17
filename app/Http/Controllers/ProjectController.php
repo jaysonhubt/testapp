@@ -14,8 +14,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        return response()->json($projects);
+        $projects = new Project;
+        $result = $projects->show();
+
+        return response()->json($result);
     }
 
     /**
@@ -47,8 +49,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::find($id);
-        return response()->json($project);//
+        $projects = new Project;
+        $result = $projects->show($id);
+
+        return response()->json($result);
     }
 
     /**
