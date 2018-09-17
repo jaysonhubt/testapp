@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    public function updateProject($request, $id)
+    {
+        $project = $this->find($id);
+
+        return $this->saveData($project, $request);
+    }
+
     public function storeProject($request)
     {
         return $this->saveData($this, $request);
