@@ -25,4 +25,14 @@ class Role extends Model
 
         return $this;
     }
+
+    public function deleteRole($id)
+    {
+        $role = $this->find($id);
+        if ($role) {
+            $role->delete();
+            return response()->json("Deleted role success");
+        }
+        return response()->json("Role does not exist");
+    }
 }
