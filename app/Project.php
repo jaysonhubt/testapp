@@ -13,6 +13,11 @@ class Project extends Model
         return $this->saveData($project, $request);
     }
 
+    public function storeProject($request)
+    {
+        return $this->saveData($this, $request);
+    }
+
     public function saveData($project, $request)
     {
         $project->name = $request->name;
@@ -23,5 +28,13 @@ class Project extends Model
         $project->save();
 
         return $project;
+    }
+
+    public function showAll() {
+        return $this->all();
+    }
+
+    public function show($id) {
+        return $this->find($id);
     }
 }

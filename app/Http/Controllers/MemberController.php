@@ -90,6 +90,7 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $member = new Member;
+        return $member->deleteMember($id);
     }
 }
