@@ -19,3 +19,5 @@ Route::resource('members', 'MemberController');
 
 Route::resource('roles', 'RoleController');
 
+Route::resource('projects', 'ProjectController');
+

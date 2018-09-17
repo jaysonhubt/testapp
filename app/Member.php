@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
+    public function roles()
+    {
+        return $this->hasMany('App\Role','member_id','id');
+    }
+
     public function storeMember($request)
     {
         return $this->saveData($this, $request);
@@ -16,6 +21,19 @@ class Member extends Model
         $member = $this->find($id);
 
         return $this->saveData($member, $request);
+    }
+
+    public function deleteMember($id)
+    {
+        $member = $this->find($id);
+        if ($member) {
+            foreach ($member->roles as $role) {
+                $role->delete();
+            };
+            $member->delete();
+            return response()->json("Deleted member success");
+        }
+        return response()->json("Member does not exist");
     }
 
     public function saveData($member, $request)

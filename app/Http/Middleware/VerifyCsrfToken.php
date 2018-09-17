@@ -22,6 +22,8 @@ class VerifyCsrfToken extends Middleware
         'members',
         'members/*',
         'roles',
-        'roles/*'
+        'roles/*',
+        'projects',
+        'projects/*'
     ];
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Member;
-use App\Http\Requests\StoreMemberRequest;
-use App\Http\Requests\UpdateMemberRequest;
+use App\Project;
+use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\StoreProjectRequest;
 
-class MemberController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::all();
-        return response()->json($members);
+        $projects = new Project;
+        $result = $projects->showAll();
+
+        return response()->json($result);
     }
 
     /**
@@ -33,33 +35,35 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMemberRequest $request
+     * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMemberRequest $request)
+    public function store(StoreProjectRequest $request)
     {
-        $member = new Member;
-        $member->storeMember($request);
+        $project = new Project;
+        $project->storeProject($request);
 
-        return response()->json($member);
+        return response()->json($project);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $member = Member::find($id);
-        return response()->json($member);
+        $projects = new Project;
+        $result = $projects->show($id);
+
+        return response()->json($result);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,14 +74,14 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMemberRequest $request
-     * @param  int $id
+     * @param  \App\Http\Requests\UpdateProjectRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMemberRequest $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        $member = new Member;
-        $result = $member->updateMember($request, $id);
+        $project = new Project;
+        $result = $project->updateProject($request, $id);
 
         return response()->json($result);
     }
@@ -85,12 +89,12 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $member = new Member;
-        return $member->deleteMember($id);
+        $project = new Project;
+        return $project->deleteProject($id);
     }
 }
