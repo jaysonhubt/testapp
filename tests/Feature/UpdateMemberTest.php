@@ -43,6 +43,28 @@ class UpdateMemberTest extends TestCase
 
         $response = $this->call('POST', '/members/1', $updateRequest);
 
+        $response->assertStatus(200);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
+
         $response->assertJson([
         	'id' => 1,
             'name' => $updateRequest['name'],
@@ -90,6 +112,28 @@ class UpdateMemberTest extends TestCase
 
         $response = $this->call('POST', '/members/1', $updateRequest);
 
+        $response->assertStatus(200);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'new-avatar.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
+
         $response->assertJson([
         	'id' => 1,
             'name' => $updateRequest['name'],
@@ -135,6 +179,28 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('name');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 
     public function testUpdateMemberFailInfo()
@@ -168,6 +234,28 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('information');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 
     public function testUpdateMemberFailPhone()
@@ -201,6 +289,28 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('phone');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 
     public function testUpdateMemberFailDob()
@@ -234,6 +344,28 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('dob');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 
     public function testUpdateMemberFailPosition()
@@ -267,6 +399,28 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('position');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 
     public function testUpdateMemberFailGender()
@@ -300,5 +454,27 @@ class UpdateMemberTest extends TestCase
         $response = $this->call('POST', '/members/1', $updateRequest);
 
         $response->assertSessionHasErrors('gender');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $updateRequest['name'],
+            'information' => $updateRequest['information'],
+            'phone' => $updateRequest['phone'],
+            'dob' => $updateRequest['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $updateRequest['position'],
+            'gender' => $updateRequest['gender']
+        ]);
     }
 }

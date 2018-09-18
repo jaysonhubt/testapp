@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateMemberTest extends TestCase
 {
-	use DatabaseMigrations;
+    use DatabaseMigrations;
     
     public function testCreateMemberSuccess()
     {
@@ -30,6 +30,18 @@ class CreateMemberTest extends TestCase
         ];
 
         $response = $this->call('POST', '/members', $request);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
 
         $response->assertJson([
             'name' => $request['name'],
@@ -60,6 +72,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('name');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailInfo()
@@ -80,6 +104,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('information');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailPhone()
@@ -100,6 +136,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('phone');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailDob()
@@ -120,6 +168,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('dob');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailAvatar()
@@ -137,6 +197,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('avatar');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailPosition()
@@ -157,6 +229,18 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('position');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 
     public function testCreateMemberFailGender()
@@ -177,5 +261,17 @@ class CreateMemberTest extends TestCase
         $response = $this->call('POST', '/members', $request);
 
         $response->assertSessionHasErrors('gender');
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
     }
 }

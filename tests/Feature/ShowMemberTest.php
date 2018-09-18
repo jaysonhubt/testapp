@@ -35,6 +35,30 @@ class ShowMemberTest extends TestCase
 
         $response = $this->call('GET', '/members');
 
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('members', [
+            'id' => 1,
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
+        $this->assertDatabaseHas('members', [
+            'id' => 2,
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
         $response->assertJson([
         	[
 	        	'id' => 1,
@@ -83,6 +107,19 @@ class ShowMemberTest extends TestCase
 
         $response = $this->call('GET', '/members/1');
 
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('members', [
+            'id' => 1,
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+
         $response->assertJson([
         	'id' => 1,
             'name' => $request['name'],
@@ -96,5 +133,29 @@ class ShowMemberTest extends TestCase
             'updated_at' => now()->format('Y-m-d H:i:s')
         ]);
 
+    }
+
+    public function testShowSpecificMemberFail()
+    {
+        $file = new UploadedFile(base_path('public\avatar\logo.png'),
+            'logo.png', 'image/png', 10, $error = null, $test = true);
+
+        $request = [
+            'name' => 'Test Member',
+            'information' => "Test Member's info",
+            'phone' => '(+84) 912 345 678',
+            'dob' => '2000-01-01',
+            'avatar' => $file,
+            'position' => 'junior',
+            'gender' => '1'
+        ];
+
+        $this->call('POST', '/members', $request);
+
+        $response = $this->call('GET', '/members/2');
+
+        $this->assertDatabaseMissing('members', [
+            'id' => 2
+        ]);
     }
 }
