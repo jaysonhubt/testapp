@@ -31,8 +31,12 @@ class Role extends Model
         $role = $this->find($id);
         if ($role) {
             $role->delete();
-            return response()->json("Deleted role success");
+            return response()->json([
+                'status'=> 'Deleted role success'
+            ]);
         }
-        return response()->json("Role does not exist");
+        return response()->json([
+            'status' => 'Role does not exist'
+        ]);
     }
 }
