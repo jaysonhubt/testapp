@@ -57,7 +57,7 @@ class Member extends Model
 
     public function showAllMembers() {
         $members = $this->all();
-        if (!$members) {
+        if (!$members->count()) {
             return response()->json([
                 'status' => 'Have no members'
             ]);
