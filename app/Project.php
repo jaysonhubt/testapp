@@ -50,20 +50,14 @@ class Project extends Model
 
     public function showAllProjects() {
         $projects = $this->all();
-        if (!$projects->count()) {
-            return response()->json([
-                'status' => 'Have no projects'
-            ]);
-        }
+
         return response()->json($projects);
     }
 
     public function showProject($id) {
         $project = $this->find($id);
         if (!$project) {
-            return response()->json([
-                'status' => 'Project does not exist'
-            ]);
+            abort(404);
         }
         return response()->json($project);
     }
