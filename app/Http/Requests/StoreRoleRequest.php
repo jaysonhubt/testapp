@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreRoleRequest extends FormRequest
 {
@@ -28,5 +30,9 @@ class StoreRoleRequest extends FormRequest
             'member_id' => 'bail|required|numeric|exists:members,id',
             'role' => 'bail|required|in:dev,pl,pm,po,sm'
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

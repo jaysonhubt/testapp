@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreProjectRequest extends FormRequest
 {
@@ -30,5 +32,9 @@ class StoreProjectRequest extends FormRequest
             'type' => 'bail|required|in:lab,single,acceptance',
             'status' => 'bail|required|in:planned,onhold,doing,done,cancelled'
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreMemberRequest extends FormRequest
 {
@@ -52,5 +54,9 @@ class StoreMemberRequest extends FormRequest
             'dob.required' => 'Dob is required',
             'dob.date' => 'Dob is invalid datetime format'
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }
