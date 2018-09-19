@@ -54,4 +54,18 @@ class Member extends Model
 
         return $member;
     }
+
+    public function showAllMembers() {
+        $members = $this->all();
+
+        return response()->json($members);
+    }
+
+    public function showMember($id) {
+        $member = $this->find($id);
+        if (!$member) {
+            abort(404);
+        }
+        return response()->json($member);
+    }
 }
