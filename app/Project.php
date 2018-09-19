@@ -20,11 +20,11 @@ class Project extends Model
             };
             $project->delete();
             return response()->json([
-                'status' => 'Deleted project success'
+                'message' => 'Deleted project success'
             ]);
         }
         return response()->json([
-            'status' => 'Project does not exist'
+            'message' => 'Project does not exist'
         ]);
     }
 

@@ -32,11 +32,11 @@ class Role extends Model
         if ($role) {
             $role->delete();
             return response()->json([
-                'status'=> 'Deleted role success'
+                'message'=> 'Deleted role success'
             ]);
         }
         return response()->json([
-            'status' => 'Role does not exist'
+            'message' => 'Role does not exist'
         ]);
     }
 }

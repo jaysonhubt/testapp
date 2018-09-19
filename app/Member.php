@@ -32,11 +32,11 @@ class Member extends Model
             };
             $member->delete();
             return response()->json([
-                'status' => 'Deleted member success'
+                'message' => 'Deleted member success'
             ]);
         }
         return response()->json([
-            'status' => 'Member does not exist'
+            'message' => 'Member does not exist'
         ]);
     }
 
