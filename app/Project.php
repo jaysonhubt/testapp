@@ -48,11 +48,17 @@ class Project extends Model
         return $project;
     }
 
-    public function showAll() {
-        return $this->all();
+    public function showAllProjects() {
+        $projects = $this->all();
+
+        return response()->json($projects);
     }
 
-    public function show($id) {
-        return $this->find($id);
+    public function showProject($id) {
+        $project = $this->find($id);
+        if (!$project) {
+            abort(404);
+        }
+        return response()->json($project);
     }
 }
