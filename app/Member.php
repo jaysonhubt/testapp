@@ -31,9 +31,13 @@ class Member extends Model
                 $role->delete();
             };
             $member->delete();
-            return response()->json("Deleted member success");
+            return response()->json([
+                'message' => 'Deleted member success'
+            ]);
         }
-        return response()->json("Member does not exist");
+        return response()->json([
+            'message' => 'Member does not exist'
+        ]);
     }
 
     public function saveData($member, $request)

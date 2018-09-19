@@ -19,9 +19,13 @@ class Project extends Model
                 $role->delete();
             };
             $project->delete();
-            return response()->json("Deleted project success");
+            return response()->json([
+                'message' => 'Deleted project success'
+            ]);
         }
-        return response()->json("Project does not exist");
+        return response()->json([
+            'message' => 'Project does not exist'
+        ]);
     }
 
     public function updateProject($request, $id)
