@@ -31,9 +31,13 @@ class Member extends Model
                 $role->delete();
             };
             $member->delete();
-            return response()->json("Deleted member success");
+            return response()->json([
+                'message' => 'Deleted member success'
+            ]);
         }
-        return response()->json("Member does not exist");
+        return response()->json([
+            'message' => 'Member does not exist'
+        ]);
     }
 
     public function saveData($member, $request)
@@ -53,5 +57,19 @@ class Member extends Model
         $member->save();
 
         return $member;
+    }
+
+    public function showAllMembers() {
+        $members = $this->all();
+
+        return response()->json($members);
+    }
+
+    public function showMember($id) {
+        $member = $this->find($id);
+        if (!$member) {
+            abort(404);
+        }
+        return response()->json($member);
     }
 }

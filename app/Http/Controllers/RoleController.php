@@ -37,9 +37,9 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $role = new Role;
-        $role->storeRole($request);
+        $result = $role->storeRole($request);
 
-        return response()->json($role);
+        return response()->json($result);
     }
 
     /**
@@ -82,9 +82,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($memberId, $projectId)
     {
         $role = new Role;
-        return $role->deleteRole($id);
+        return $role->deleteRole($memberId, $projectId);
     }
 }

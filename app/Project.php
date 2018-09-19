@@ -19,9 +19,13 @@ class Project extends Model
                 $role->delete();
             };
             $project->delete();
-            return response()->json("Deleted project success");
+            return response()->json([
+                'message' => 'Deleted project success'
+            ]);
         }
-        return response()->json("Project does not exist");
+        return response()->json([
+            'message' => 'Project does not exist'
+        ]);
     }
 
     public function updateProject($request, $id)
@@ -48,11 +52,17 @@ class Project extends Model
         return $project;
     }
 
-    public function showAll() {
-        return $this->all();
+    public function showAllProjects() {
+        $projects = $this->all();
+
+        return response()->json($projects);
     }
 
-    public function show($id) {
-        return $this->find($id);
+    public function showProject($id) {
+        $project = $this->find($id);
+        if (!$project) {
+            abort(404);
+        }
+        return response()->json($project);
     }
 }

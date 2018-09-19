@@ -16,8 +16,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::all();
-        return response()->json($members);
+        $members = new Member;
+        $result = $members->showAllMembers();
+
+        return $result;
     }
 
     /**
@@ -52,8 +54,10 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::find($id);
-        return response()->json($member);
+        $members = new Member;
+        $result = $members->showMember($id);
+
+        return $result;
     }
 
     /**

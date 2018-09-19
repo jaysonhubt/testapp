@@ -18,6 +18,15 @@ class Role extends Model
 
     public function storeRole($request)
     {
+        $role = $this->where([
+            ['member_id', '=', $request->member_id],
+            ['project_id', '=', $request->project_id]
+        ])->get();
+
+        if ($role->count()) {
+            return ['message'=> 'This role already exists'];
+        }
+
         $this->project_id = $request->project_id;
         $this->member_id = $request->member_id;
         $this->role = $request->role;
@@ -26,13 +35,20 @@ class Role extends Model
         return $this;
     }
 
-    public function deleteRole($id)
+    public function deleteRole($memberId, $projectId)
     {
-        $role = $this->find($id);
-        if ($role) {
+        $role = $this->where([
+            ['member_id', '=', $memberId],
+            ['project_id', '=', $projectId]
+        ]);
+        if ($role->count()) {
             $role->delete();
-            return response()->json("Deleted role success");
+            return response()->json([
+                'message'=> 'Deleted role success'
+            ]);
         }
-        return response()->json("Role does not exist");
+        return response()->json([
+            'message' => 'Role does not exist'
+        ]);
     }
 }
