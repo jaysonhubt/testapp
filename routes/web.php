@@ -17,7 +17,15 @@ Route::get('/', function () {
 
 Route::resource('members', 'MemberController');
 
-Route::resource('roles', 'RoleController');
+Route::post('roles', [
+	'as' => 'roles.store',
+	'uses' => 'RoleController@store'
+]);
+
+Route::delete('roles/{memberId}/{projectId}', [
+	'as' => 'roles.destroy',
+	'uses' => 'RoleController@destroy'
+]);
 
 Route::resource('projects', 'ProjectController');
 
