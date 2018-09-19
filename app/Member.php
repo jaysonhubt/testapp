@@ -54,4 +54,24 @@ class Member extends Model
 
         return $member;
     }
+
+    public function showAllMembers() {
+        $members = $this->all();
+        if (!$members) {
+            return response()->json([
+                'status' => 'Have no members'
+            ]);
+        }
+        return response()->json($members);
+    }
+
+    public function showMember($id) {
+        $member = $this->find($id);
+        if (!$member) {
+            return response()->json([
+                'status' => 'Member does not exist'
+            ]);
+        }
+        return response()->json($member);
+    }
 }
