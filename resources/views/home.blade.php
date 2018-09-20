@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
 	<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('js/testapp.js')}}"></script>
 </head>
 <body>
 	<div class="container">
