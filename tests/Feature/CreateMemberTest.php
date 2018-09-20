@@ -826,6 +826,66 @@ class CreateMemberTest extends TestCase
         ]);
     }
 
+    public function testCreateMemberSuccessGenderIs0()
+    {
+        $file = new UploadedFile(base_path('public\avatar\logo.png'),
+            'logo.png', 'image/png', 10, $error = null, $test = true);
+
+        $request = [
+            'name' => 'Test Member',
+            'information' => "Test Member's info",
+            'phone' => '(+84) 912 345 678',
+            'dob' => '2000-01-01',
+            'avatar' => $file,
+            'position' => 'bo',
+            'gender' => '0'
+        ];
+
+        $response = $this->call('POST', '/members', $request);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+    }
+
+    public function testCreateMemberSuccessGenderIs1()
+    {
+        $file = new UploadedFile(base_path('public\avatar\logo.png'),
+            'logo.png', 'image/png', 10, $error = null, $test = true);
+
+        $request = [
+            'name' => 'Test Member',
+            'information' => "Test Member's info",
+            'phone' => '(+84) 912 345 678',
+            'dob' => '2000-01-01',
+            'avatar' => $file,
+            'position' => 'bo',
+            'gender' => '1'
+        ];
+
+        $response = $this->call('POST', '/members', $request);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('members', [
+            'name' => $request['name'],
+            'information' => $request['information'],
+            'phone' => $request['phone'],
+            'dob' => $request['dob'],
+            'avatar' => time() . 'logo.png',
+            'position' => $request['position'],
+            'gender' => $request['gender']
+        ]);
+    }
+
     public function testCreateMemberFailGenderNull()
     {
         $file = new UploadedFile(base_path('public\avatar\logo.png'),
@@ -837,7 +897,7 @@ class CreateMemberTest extends TestCase
             'phone' => '(+84) 912 345 678',
             'dob' => '2000-01-01',
             'avatar' => $file,
-            'position' => 'super junior',
+            'position' => 'junior',
             'gender' => null
         ];
 
