@@ -2,14 +2,15 @@
     <table class="table members table-striped table-bordered table-hover table-condensed">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>DOB</th>
-                <th>Position</th>
-                <th>Gender</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">DOB</th>
+                <th class="text-center">Position</th>
+                <th class="text-center">Gender</th>
+                <th class="text-center">Detail</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
             </tr>
         </thead>
         <tbody>

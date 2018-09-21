@@ -62,7 +62,7 @@ class Member extends Model
     public function showAllMembers() {
         $members = $this->all();
 
-        return response()->json($members);
+        return $members;
     }
 
     public function showMember($id) {
