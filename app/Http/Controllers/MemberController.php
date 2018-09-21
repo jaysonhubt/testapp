@@ -18,8 +18,9 @@ class MemberController extends Controller
     {
         $members = new Member;
         $result = $members->showAllMembers();
+        $content = view('member.items',['result' => $result])->render();
 
-        return $result;
+        return response()->json(['html' => $content]);
     }
 
     /**
