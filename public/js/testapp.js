@@ -1,5 +1,4 @@
 jQuery(document).ready(function() {
-    var html = '';
     var loading = '<span class="loading">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>';
     jQuery('.nav a.members').click(function() {
         jQuery.ajax({
@@ -12,7 +11,6 @@ jQuery(document).ready(function() {
             success: function(members) {
                 jQuery('.nav a.members span.loading').remove();
                 jQuery('table.members tbody').html(members.html);
-                html = '';
             }
         });
     });
