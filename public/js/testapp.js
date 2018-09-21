@@ -15,3 +15,12 @@ jQuery(document).ready(function() {
         });
     });
 })
+function detailMember(id) {
+    jQuery.ajax({
+        type: "GET",
+        datatype: "json",
+        url: "http://testapp.com/members/" + id,
+        success: function(member) {
+        }
+    })
+}

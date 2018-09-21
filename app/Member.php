@@ -70,6 +70,6 @@ class Member extends Model
         if (!$member) {
             abort(404);
         }
-        return response()->json($member);
+        return $member;
     }
 }
