@@ -49,7 +49,7 @@ class Member extends Model
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $fileName = time() . $file->getClientOriginalName();
-            $file->storeAs('avatar', $fileName);
+            $file->storeAs('public/avatar', $fileName);
             $member->avatar = $fileName;
         }
         $member->position = $request->position;

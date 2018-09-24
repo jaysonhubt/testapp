@@ -21,6 +21,7 @@ function detailMember(id) {
         datatype: "json",
         url: "http://testapp.com/members/" + id,
         success: function(member) {
+            jQuery('.modal-body').html(member.html);
         }
     })
 }
