@@ -70,7 +70,11 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        $members = new Member;
+        $result = $members->showMember($id);
+        $content = view('member.edit',['result' => $result])->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
@@ -84,8 +88,9 @@ class MemberController extends Controller
     {
         $member = new Member;
         $result = $member->updateMember($request, $id);
+        $content = view('member.update',['result' => $result])->render();
 
-        return response()->json($result);
+        return response()->json(['html' => $content]);
     }
 
     /**
