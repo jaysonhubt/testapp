@@ -25,3 +25,17 @@ function detailMember(id) {
         }
     })
 }
+
+function deleteMember(id) {
+    jQuery.ajax({
+        type: "DELETE",
+        datatype: "json",
+        url: "http://testapp.com/members/" + id,
+        success: function(member) {
+            jQuery('h5.modal-title').text("Delete Member");
+            jQuery('.modal-body').html(member.message);
+            jQuery('#MemberModal').modal('show');
+            jQuery('table.members tbody tr#' + id).remove();
+        }
+    })
+}
