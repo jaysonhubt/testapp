@@ -22,6 +22,7 @@
         <div class="tab-content">
             <div id="members" class="tab-pane fade">
                 <h3 class="mt-5">Members List</h3>
+                <a href="#" onclick="createMember()" class="btn btn-info delete mb-2">Create Member</a>
                 @include('member.list')
             </div>
             <div id="projects" class="tab-pane fade">

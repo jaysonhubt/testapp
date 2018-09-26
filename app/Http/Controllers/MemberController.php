@@ -30,7 +30,9 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $content = view('member.create')->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
@@ -42,9 +44,10 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         $member = new Member;
-        $member->storeMember($request);
+        $result = $member->storeMember($request);
+        $content = view('member.update',['result' => $result])->render();
 
-        return response()->json($member);
+        return response()->json(['html' => $content]);
     }
 
     /**
