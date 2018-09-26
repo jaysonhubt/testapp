@@ -45,6 +45,7 @@
                 <div class="modal-body">
                 </div>
                 <div class="modal-footer">
+                    <button type="button" onClick="deleteMember()" class="btn btn-primary d-none" id="delete-button">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
