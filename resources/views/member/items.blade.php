@@ -1,5 +1,5 @@
 @foreach ($result as $item)
-    <tr>
+    <tr id="{{$item->id}}">
         <td>{{$item->id}}</td>
         <td>{{$item->name}}</td>
         <td>{{$item->phone}}</td>
@@ -14,7 +14,7 @@
         @endphp
         <td>{{$gender}}</td>
         <td><a href="#" onclick="detailMember({{$item->id}})" class="btn btn-secondary detail" data-toggle="modal" data-target="#MemberModal">Detail</a></td>
-        <td><a href="#" class="btn btn-primary edit">Edit</a></td>
+        <td><a href="#" onclick="editMember({{$item->id}})" class="btn btn-primary edit" data-toggle="modal" data-target="#MemberModal">Edit</a></td>
         <td><a href="#" class="btn btn-danger delete">Delete</a></td>
     </tr>
 @endforeach
