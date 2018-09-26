@@ -165,3 +165,34 @@ function detailProject(id) {
         }
     })
 }
+
+function editProject(id) {
+    jQuery('h5.modal-title').text("Update Project Detail");
+    jQuery.ajax({
+        type: "GET",
+        datatype: "json",
+        url: baseUrl + "/projects/" + id + "/edit",
+        success: function(project) {
+            jQuery('.modal-body').html(project.html);
+            type = jQuery('.modal-body #update-project #type').attr('value');
+            jQuery('.modal-body #update-project #type').val(type);
+            status = jQuery('.modal-body #update-project #status').attr('value');
+            jQuery('.modal-body #update-project #status').val(status);
+        }
+    })
+}
+
+function updateProject(id) {
+    id = jQuery('#update-project').attr('data-id');
+    jQuery.ajax({
+        type: 'POST',
+        datatype: 'json',
+        url: baseUrl + "/projects/" + id,
+        data: jQuery('#update-project').serialize(),
+        success: function(project) {
+            jQuery('h5.modal-title').text("Update Project");
+            jQuery('.modal-body').html("Update success");
+            jQuery('table.projects tbody tr#' + id).html(project.html);
+        }
+    })
+}
