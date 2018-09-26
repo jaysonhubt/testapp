@@ -33,6 +33,6 @@
                 </select>
             </div>
         </div>
-        <button type="button" onClick="updateProject({{$result->id}})" class="btn btn-primary submit">Submit</button>
+        <button type="button" onClick="updateProject({{$result->id}})" class="btn btn-primary submit mx-auto">Submit</button>
     </div>
 </form>
