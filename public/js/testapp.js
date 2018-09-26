@@ -80,7 +80,17 @@ function updateMember(id) {
     })
 }
 
-function deleteMember(id) {
+function confirmDeleteMember(id) {
+    jQuery('#delete-button').removeClass('d-none');
+    jQuery('h5.modal-title').text("Delete Member");
+    jQuery('.modal-body').text('Do you want to delete this member?');
+    jQuery('#MemberModal').modal('show');
+    jQuery('#delete-button').attr('data-id',id);
+}
+
+function deleteMember() {
+    id = jQuery('#delete-button').attr('data-id');
+    jQuery('#delete-button').addClass('d-none');
     jQuery.ajax({
         type: "DELETE",
         datatype: "json",
