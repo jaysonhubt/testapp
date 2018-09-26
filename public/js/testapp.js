@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    jQuery('#MemberModal').on('hidden.bs.modal', function(){
+    jQuery('#Modal').on('hidden.bs.modal', function(){
         jQuery('.modal-body').html('');
     })
 })
@@ -84,7 +84,7 @@ function confirmDeleteMember(id) {
     jQuery('#delete-button').removeClass('d-none');
     jQuery('h5.modal-title').text("Delete Member");
     jQuery('.modal-body').text('Do you want to delete this member?');
-    jQuery('#MemberModal').modal('show');
+    jQuery('#Modal').modal('show');
     jQuery('#delete-button').attr('data-id',id);
 }
 
@@ -98,7 +98,7 @@ function deleteMember() {
         success: function(member) {
             jQuery('h5.modal-title').text("Delete Member");
             jQuery('.modal-body').html(member.message);
-            jQuery('#MemberModal').modal('show');
+            jQuery('#Modal').modal('show');
             jQuery('table.members tbody tr#' + id).remove();
         }
     })
@@ -111,7 +111,7 @@ function createMember() {
         url: baseUrl + "/members/create",
         success: function(member) {
             jQuery('.modal-body').html(member.html);
-            jQuery('#MemberModal').modal('show');
+            jQuery('#Modal').modal('show');
         }
     })
 }
@@ -144,14 +144,24 @@ function createMemberPost() {
             jQuery('h5.modal-title').text("Create Member");
             jQuery('.modal-body').html("Create success");
             jQuery('table.members tbody').append(member.html);
-            // jQuery('table.members tbody tr#' + id).html(member.html);
         },
         error: function (result) {
             errors = result.responseJSON.errors;
             jQuery.each(errors, function(index, value) {
-                console.log(index + ': ' + value);
                 jQuery('#create-member small#' + index + 'Error').text(value);
             })
+        }
+    })
+}
+
+function detailProject(id) {
+    jQuery('h5.modal-title').text('Project Detail');
+    jQuery.ajax({
+        type: "GET",
+        datatype: "json",
+        url: baseUrl + "/projects/" + id,
+        success: function(project) {
+            jQuery('.modal-body').html(project.html);
         }
     })
 }

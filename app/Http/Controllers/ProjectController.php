@@ -57,8 +57,9 @@ class ProjectController extends Controller
     {
         $projects = new Project;
         $result = $projects->showProject($id);
+        $content = view('project.detail',['result' => $result])->render();
 
-        return $result;
+        return response()->json(['html' => $content]);
     }
 
     /**

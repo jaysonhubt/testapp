@@ -63,6 +63,6 @@ class Project extends Model
         if (!$project) {
             abort(404);
         }
-        return response()->json($project);
+        return $project;
     }
 }
