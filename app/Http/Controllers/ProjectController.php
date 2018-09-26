@@ -70,7 +70,11 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projects = new Project;
+        $result = $projects->showProject($id);
+        $content = view('project.edit',['result' => $result])->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
@@ -84,8 +88,9 @@ class ProjectController extends Controller
     {
         $project = new Project;
         $result = $project->updateProject($request, $id);
+        $content = view('project.update',['result' => $result])->render();
 
-        return response()->json($result);
+        return response()->json(['html' => $content]);
     }
 
     /**
