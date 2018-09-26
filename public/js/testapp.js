@@ -25,3 +25,15 @@ function detailMember(id) {
         }
     })
 }
+
+function createMember() {
+    jQuery.ajax({
+        type: "GET",
+        datatype: "json",
+        url: "http://testapp.com/members/create",
+        success: function(member) {
+            jQuery('.modal-body').html(member.html);
+            jQuery('#MemberModal').modal('show');
+        }
+    })
+}

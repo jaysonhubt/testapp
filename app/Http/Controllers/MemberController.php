@@ -30,7 +30,9 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $content = view('member.create')->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
