@@ -55,7 +55,7 @@ class Project extends Model
     public function showAllProjects() {
         $projects = $this->all();
 
-        return response()->json($projects);
+        return $projects;
     }
 
     public function showProject($id) {
