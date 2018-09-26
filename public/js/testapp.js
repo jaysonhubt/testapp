@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
             type: "GET",
             datatype: "json",
-            url: "http://testapp.com/projects",
+            url: baseUrl + "/projects",
             beforeSend: function() {
                 jQuery('.nav a.projects').append(loading);
             },
@@ -84,7 +84,7 @@ function deleteMember(id) {
     jQuery.ajax({
         type: "DELETE",
         datatype: "json",
-        url: "http://testapp.com/members/" + id,
+        url: baseUrl + "/members/" + id,
         success: function(member) {
             jQuery('h5.modal-title').text("Delete Member");
             jQuery('.modal-body').html(member.message);
@@ -98,10 +98,50 @@ function createMember() {
     jQuery.ajax({
         type: "GET",
         datatype: "json",
-        url: "http://testapp.com/members/create",
+        url: baseUrl + "/members/create",
         success: function(member) {
             jQuery('.modal-body').html(member.html);
             jQuery('#MemberModal').modal('show');
+        }
+    })
+}
+
+function createMemberPost() {
+    jQuery('#create-member small.has-error').text('');
+    name = jQuery('#create-member input[name=name]').val();
+    information = jQuery('#create-member textarea[name=information]').val();
+    phone = jQuery('#create-member input[name=phone]').val();
+    dob = jQuery('#create-member input[name=dob]').val();
+    position = jQuery('#create-member select[name=position]').val();
+    gender = jQuery('#create-member select[name=gender]').val();
+    var avatar =jQuery('#create-member input[name=avatar]')[0].files[0];
+    form = new FormData();
+    form.append('name', name);
+    form.append('information', information);
+    form.append('phone', phone);
+    form.append('dob', dob);
+    form.append('position', position);
+    form.append('gender', gender);
+    form.append('avatar', avatar);
+    jQuery.ajax({
+        url: baseUrl + "/members",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function (member) {
+            jQuery('h5.modal-title').text("Create Member");
+            jQuery('.modal-body').html("Create success");
+            jQuery('table.members tbody').append(member.html);
+            // jQuery('table.members tbody tr#' + id).html(member.html);
+        },
+        error: function (result) {
+            errors = result.responseJSON.errors;
+            jQuery.each(errors, function(index, value) {
+                console.log(index + ': ' + value);
+                jQuery('#create-member small#' + index + 'Error').text(value);
+            })
         }
     })
 }
