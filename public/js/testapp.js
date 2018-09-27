@@ -76,6 +76,12 @@ function updateMember(id) {
             jQuery('h5.modal-title').text("Update Member");
             jQuery('.modal-body').html("Update success");
             jQuery('table.members tbody tr#' + id).html(member.html);
+        },
+        error: function (result) {
+            errors = result.responseJSON.errors;
+            jQuery.each(errors, function(index, value) {
+                jQuery('#update-member small#' + index + 'Error').text(value);
+            })
         }
     })
 }
@@ -193,6 +199,12 @@ function updateProject(id) {
             jQuery('h5.modal-title').text("Update Project");
             jQuery('.modal-body').html("Update success");
             jQuery('table.projects tbody tr#' + id).html(project.html);
+        },
+        error: function (result) {
+            errors = result.responseJSON.errors;
+            jQuery.each(errors, function(index, value) {
+                jQuery('#update-project small#' + index + 'Error').text(value);
+            })
         }
     })
 }

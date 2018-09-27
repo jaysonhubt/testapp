@@ -5,14 +5,17 @@
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{$result->name}}">
+                <small id="nameError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Information</label>
                 <textarea class="form-control" name="information" placeholder="Enter Information">{{$result->information}}</textarea>
+                <small id="informationError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Deadline</label>
                 <input type="text" class="form-control" name="deadline" id="dob" value="{{$result->deadline}}">
+                <small id="deadlineError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label for="type">Type</label>
@@ -21,6 +24,7 @@
                     <option value="single">Single</option>
                     <option value="acceptance">Acceptance</option>
                 </select>
+                <small id="typeError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Status</label>
@@ -31,6 +35,7 @@
                     <option value="done">Done</option>
                     <option value="cancelled">Cancelled</option>
                 </select>
+                <small id="statusError" class="form-text text-danger has-error"></small>
             </div>
         </div>
         <button type="button" onClick="updateProject({{$result->id}})" class="btn btn-primary submit mx-auto">Submit</button>

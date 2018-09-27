@@ -5,18 +5,22 @@
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{$result->name}}">
+                <small id="nameError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Information</label>
                 <textarea class="form-control" name="information" placeholder="Enter Information">{{$result->information}}</textarea>
+                <small id="informationError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Phone</label>
                 <input type="text" class="form-control" name="phone" placeholder="Enter Phone" value="{{$result->phone}}">
+                <small id="phoneError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>DOB</label>
                 <input type="text" class="form-control" name="dob" id="dob" value="{{$result->dob}}">
+                <small id="dobError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label for="position">Position</label>
@@ -29,6 +33,7 @@
                     <option value="cto">CTO</option>
                     <option value="bo">BO</option>
                 </select>
+                <small id="positionError" class="form-text text-danger has-error"></small>
             </div>
             <div class="form-group">
                 <label>Gender</label>
@@ -36,6 +41,7 @@
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>
+                <small id="genderError" class="form-text text-danger has-error"></small>
             </div>
         </div>
         <div class="col-6">
@@ -43,6 +49,7 @@
                 <label>Avatar</label>
                 <img src="{{asset('storage/avatar')}}/{{$result->avatar}}" class="img-thumbnail">
                 <input type="file" class="form-control" id="avatar" name="avatar">
+                <small id="avatarError" class="form-text text-danger has-error"></small>
             </div>
         </div>
         <button type="button" onClick="updateMember({{$result->id}})" class="btn btn-primary submit">Submit</button>
