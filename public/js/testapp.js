@@ -228,3 +228,27 @@ function createProjectPost() {
         }
     })
 }
+
+function confirmDeleteProject(id) {
+    jQuery('#delete-project-button').removeClass('d-none');
+    jQuery('h5.modal-title').text("Delete Project");
+    jQuery('.modal-body').text('Do you want to delete this project?');
+    jQuery('#Modal').modal('show');
+    jQuery('#delete-project-button').attr('data-id',id);
+}
+
+function deleteProject() {
+    id = jQuery('#delete-project-button').attr('data-id');
+    jQuery('#delete-project-button').addClass('d-none');
+    jQuery.ajax({
+        type: "DELETE",
+        datatype: "json",
+        url: baseUrl + "/projects/" + id,
+        success: function(member) {
+            jQuery('h5.modal-title').text("Delete Project");
+            jQuery('.modal-body').html(member.message);
+            jQuery('#Modal').modal('show');
+            jQuery('table.projects tbody tr#' + id).remove();
+        }
+    })
+}
