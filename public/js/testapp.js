@@ -34,6 +34,8 @@ jQuery(document).ready(function() {
 
     jQuery('#Modal').on('hidden.bs.modal', function(){
         jQuery('.modal-body').html('');
+        jQuery('#delete-button').addClass('d-none');
+        jQuery('#delete-project-button').addClass('d-none');
     })
 })
 
