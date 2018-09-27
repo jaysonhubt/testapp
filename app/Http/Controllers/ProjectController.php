@@ -30,7 +30,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $content = view('project.create')->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
@@ -42,9 +44,10 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $project = new Project;
-        $project->storeProject($request);
+        $result = $project->storeProject($request);
+        $content = view('project.update',['result' => $result])->render();
 
-        return response()->json($project);
+        return response()->json(['html' => $content]);
     }
 
     /**

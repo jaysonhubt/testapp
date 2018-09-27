@@ -27,6 +27,7 @@
             </div>
             <div id="projects" class="tab-pane fade">
                 <h3 class="mt-5">Projects List</h3>
+                <a href="#" onclick="createProject()" class="btn btn-info delete mb-2">Create Project</a>
                 @include('project.list')
             </div>
         </div>

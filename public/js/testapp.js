@@ -196,3 +196,35 @@ function updateProject(id) {
         }
     })
 }
+
+function createProject() {
+    jQuery.ajax({
+        type: "GET",
+        datatype: "json",
+        url: baseUrl + "/projects/create",
+        success: function(project) {
+            jQuery('.modal-body').html(project.html);
+            jQuery('#Modal').modal('show');
+        }
+    })
+}
+
+function createProjectPost() {
+    jQuery.ajax({
+        type: 'POST',
+        datatype: 'json',
+        url: baseUrl + "/projects",
+        data: jQuery('#create-project').serialize(),
+        success: function(project) {
+            jQuery('h5.modal-title').text("Create Project");
+            jQuery('.modal-body').html("Create success");
+            jQuery('table.projects tbody').append(project.html);
+        },
+        error: function (result) {
+            errors = result.responseJSON.errors;
+            jQuery.each(errors, function(index, value) {
+                jQuery('#create-project small#' + index + 'Error').text(value);
+            })
+        }
+    })
+}
