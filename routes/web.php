@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Route::resource('members', 'MemberController');
 
+Route::get('roles/{projectId}', [
+	'as' => 'roles.show',
+	'uses' => 'RoleController@show'
+]);
+
 Route::post('roles', [
 	'as' => 'roles.store',
 	'uses' => 'RoleController@store'
