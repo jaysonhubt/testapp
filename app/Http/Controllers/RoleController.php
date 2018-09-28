@@ -61,8 +61,7 @@ class RoleController extends Controller
             ]
         )->render();
 
-        // return response()->json(['html' => $content]);
-        return $content;
+        return response()->json(['html' => $content]);
     }
 
     /**

@@ -11,6 +11,7 @@
                 <th class="text-center">Detail</th>
                 <th class="text-center">Edit</th>
                 <th class="text-center">Delete</th>
+                <th class="text-center">Role</th>
             </tr>
         </thead>
         <tbody>
