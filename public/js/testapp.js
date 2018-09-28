@@ -252,3 +252,16 @@ function deleteProject() {
         }
     })
 }
+
+function editRole(projectId) {
+    jQuery.ajax({
+        type: "GET",
+        datatype: 'json',
+        url: baseUrl + "/roles/" + projectId,
+        success: function(role) {
+            jQuery('h5.modal-title').text("Role in project");
+            jQuery('.modal-body').html(role.html);
+            jQuery('#Modal').modal('show');
+        }
+    })
+}

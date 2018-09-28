@@ -48,9 +48,20 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($projectId)
     {
-        //
+        $role = new Role;
+        $membersHaveRole = $role->showMemberInProject($projectId);
+        $membersHaveNoRole = $role->showMemberNotInProject($projectId);
+        $content = view(
+            'project.role',
+            [
+                'membersHaveRole' => $membersHaveRole,
+                'membersHaveNoRole' => $membersHaveNoRole
+            ]
+        )->render();
+
+        return response()->json(['html' => $content]);
     }
 
     /**
